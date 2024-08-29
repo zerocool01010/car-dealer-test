@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-const Loading = () => <div>Loading vehicle models...</div>;
+const Loading = () => <div className='bg-red-500 h-screen w-full font-extrabold'>Loading vehicle models...</div>;
 
 const VehicleModels = async ({ makeId, year }) => {
   try {
