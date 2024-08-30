@@ -12,13 +12,18 @@ const VehicleModels = async ({ makeId, year }) => {
     }
 
     const vehicleModels = data.Results || [];
+    const makeName = vehicleModels[0].Make_Name;
 
     return (
-      <ul className="list-disc pl-5">
-        {vehicleModels.map((model) => (
-          <li key={model.Model_Name} className="text-gray-700">{model.Model_Name}</li>
-        ))}
-      </ul>
+      <>
+        <h1 className="text-4xl font-bold mb-4">Vehicle models for {makeName} in {year}</h1>
+        <ul className="list-disc pl-5">
+          {vehicleModels.map((model) => (
+            <li key={model.Model_Name} className="text-gray-700">{model.Model_Name}</li>
+          ))}
+        </ul>
+      </>
+
     );
   } catch (err) {
     return <div className="text-red-500">{err.message}</div>;
@@ -30,7 +35,6 @@ export default function ResultPage({ params }) {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <h1 className="text-4xl font-bold mb-4">Vehicle models for {makeId} {year}</h1>
       <Suspense fallback={<Loading />}>
         <VehicleModels makeId={makeId} year={year} />
       </Suspense>
