@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 
-const Loading = () => <div className='bg-red-500 h-screen w-full font-extrabold'>Loading vehicle models...</div>;
+const Loading = () => <div className='bg-red-800 p-8 rounded-xl border-radi font-extrabold'>Loading vehicle models...</div>;
 
 const VehicleModels = async ({ makeId, year }) => {
   try {
@@ -11,14 +11,24 @@ const VehicleModels = async ({ makeId, year }) => {
       throw new Error(data.Message || 'Failed to fetch data');
     }
 
-    const vehicleModels = data.Results || [];
-    const makeName = vehicleModels[0].Make_Name;
+    const vehicleModels = data || [];
+
+    console.log(vehicleModels.Count)
+    console.log(vehicleModels)
+    
+    if (vehicleModels.Count < 1) {
+      return <>
+      <h1 className="text-4xl font-bold mb-4 text-red-700">No vehicle models were found</h1>
+      </>
+    }
+
+    const makeName = vehicleModels.Results[0].Make_Name && vehicleModels.Results[0].Make_Name;
 
     return (
       <>
         <h1 className="text-4xl font-bold mb-4">Vehicle models for {makeName} in {year}</h1>
         <ul className="list-disc pl-5">
-          {vehicleModels.map((model) => (
+          {vehicleModels.Results.map((model) => (
             <li key={model.Model_Name} className="text-gray-700">{model.Model_Name}</li>
           ))}
         </ul>

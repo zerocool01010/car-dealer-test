@@ -44,7 +44,7 @@ export default function Home() {
       <select
         value={selectedVehicleType}
         onChange={(e) => setSelectedVehicleType(e.target.value)}
-        className="border border-gray-300 p-2 rounded mb-4 w-full max-w-md"
+        className="border border-gray-300 p-2 rounded mb-4 w-full max-w-md bg-slate-700"
       >
         <option value="">Select Vehicle Type</option>
         {vehicleTypes.map((type) => (
@@ -57,7 +57,7 @@ export default function Home() {
       <select
         value={selectedYear}
         onChange={(e) => setSelectedYear(e.target.value)}
-        className="border border-gray-300 p-2 rounded mb-4 w-full max-w-md"
+        className="border border-gray-300 p-2 rounded mb-4 w-full max-w-md bg-slate-700"
       >
         <option value="">Select Model Year</option>
         {years.map((year) => (
@@ -66,18 +66,6 @@ export default function Home() {
           </option>
         ))}
       </select>
-
-      <div className="bg-white p-6 rounded shadow-md w-full max-w-md">
-        {/* <p className="text-gray-700">
-          You are filtering for: <span className="font-bold">{filter}</span>
-        </p> */}
-        <p className="text-gray-700">
-          Vehicle Type: <span className="font-bold">{selectedVehicleType}</span>
-        </p>
-        <p className="text-gray-700">
-          Model Year: <span className="font-bold">{selectedYear}</span>
-        </p>
-      </div>
 
       <Link href={`/result/${selectedVehicleType}/${selectedYear}`}>
         <button
